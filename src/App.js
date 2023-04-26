@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import NabBar from './navbar/NabBar';
+import ProductAll from './homepage/ProductAll';
+import ProductDetail from './homepage/ProductDetail';
+import Login from './homepage/Login';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
+
 
 function App() {
+  const [userlogin, setUserlogin] = useState(false)
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <NabBar userlogin={userlogin} setUserlogin={setUserlogin}/>
+      
+      <Routes>
+        <Route path='/' element={<ProductAll userlogin={userlogin} />}/>
+        <Route path='/detail/:id' element={<ProductDetail/>}/>
+        <Route path='/login' element={<Login setUserlogin={setUserlogin}/>}/>
+      </Routes>
     </div>
   );
 }
